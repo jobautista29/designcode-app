@@ -56,6 +56,7 @@ class SectionScreen extends React.Component {
   }
 }
 
+
 export default SectionScreen;
 
 const Container = styled.View`
@@ -101,6 +102,7 @@ const CloseView = styled.View`
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   justify-content: center;
   align-items: center;
+
 `;
 
 const Wrapper = styled.View`
@@ -122,4 +124,4 @@ const Subtitle = styled.Text`
   color: rgba(255, 255, 255, 0.8);
   margin-left: 5px;
   text-transform: uppercase;
-`;
+`;

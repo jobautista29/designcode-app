@@ -15,6 +15,7 @@ class ProjectsScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
+
   state = {
     pan: new Animated.ValueXY(),
     scale: new Animated.Value(0.9),
@@ -24,7 +25,7 @@ class ProjectsScreen extends React.Component {
     index: 0
   };
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
 
@@ -106,6 +107,7 @@ class ProjectsScreen extends React.Component {
             image={projects[getNextIndex(this.state.index)].image}
             author={projects[getNextIndex(this.state.index)].author}
             text={projects[getNextIndex(this.state.index)].text}
+            canOpen={true}
           />
         </Animated.View>
         <Animated.View
@@ -113,7 +115,7 @@ class ProjectsScreen extends React.Component {
             position: "absolute",
             top: 0,
             left: 0,
-            zIndex: -3,
+            zIndex: -2,
             width: "100%",
             height: "100%",
             justifyContent: "center",
