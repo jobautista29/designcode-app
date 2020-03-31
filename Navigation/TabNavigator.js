@@ -4,7 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import HomeScreen from "../screens/HomeScreen";
 import SectionScreen from "../screens/SectionScreen";
 import { Ionicons } from "@expo/vector-icons";
-import CoursesScreen from "../screens/CourseScreen";
+import CoursesScreen from "../screens/CoursesScreen";
 import ProjectsScreen from "../screens/ProjectsScreen";
 
 const activeColor = "#4775f2";
@@ -46,7 +46,7 @@ const CoursesStack = createStackNavigator({
 });
 
 CoursesStack.navigationOptions = {
-  tabBarLabel: "Course",
+  tabBarLabel: "Courses",
   tabBarIcon: ({ focused }) => (
     <Ionicons
       name="ios-albums"
@@ -61,24 +61,20 @@ const ProjectsStack = createStackNavigator({
 });
 
 ProjectsStack.navigationOptions = {
-  tabBarLabel: "Project",
+  tabBarLabel: "Projects",
   tabBarIcon: ({ focused }) => (
     <Ionicons
-      name="ios-home"
+      name="ios-folder"
       size={26}
       color={focused ? activeColor : inactiveColor}
     />
   )
 };
 
-const TabNavigator = createBottomTabNavigator(
-  { ProjectsStack, HomeStack, CoursesStack },
-  {
-    tabBarOptions: {
-      activeTintColor: activeColor,
-      inactiveTintColor: inactiveColor
-    }
-  }
-);
+const TabNavigator = createBottomTabNavigator({
+  HomeStack,
+  CoursesStack,
+  ProjectsStack
+});
 
 export default TabNavigator;

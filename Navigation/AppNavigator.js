@@ -11,7 +11,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     mode: "modal"
-  },
+  }
 );
 
 export default createAppContainer(TabNavigator);
