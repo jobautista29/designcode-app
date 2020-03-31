@@ -1,39 +1,104 @@
 import React from "react";
 import styled from "styled-components";
-import { Animated } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  StatusBar,
+  TouchableOpacity
+} from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import {connect} from "react-redux"
+
+function mapStateToProps(state){
+  return{
+    action: state.action
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    openCard:()=>
+    dispatch({
+      type:"OPEN_CARD"
+    }),
+    closeCard:()=>
+    dispatch({
+      type:"CLOSE_CARD"
+    })
+  }
+}
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+const tabBarHeight = 83;
 
 class Project extends React.Component {
   state = {
     cardWidth: new Animated.Value(315),
-    cardHeight: new Animated.Value(460)
+    cardHeight: new Animated.Value(460),
+    titleTop: new Animated.Value(20),
+    opacity: new Animated.Value(0)
   };
 
-  openCard =()=>{
-    Animated.spring(this.state.cardWidth, {toValue: 414}).start();
-    Animated.spring(this.state.cardWidth, {toValue: 414}).start();
-  }
+  openCard = () => {
+    if (!this.props.canOpen) return;
+
+    Animated.spring(this.state.cardWidth, { toValue: screenWidth }).start();
+    Animated.spring(this.state.cardHeight, {
+      toValue: screenHeight - tabBarHeight
+    }).start();
+    Animated.spring(this.state.titleTop, { toValue: 40 }).start();
+    Animated.timing(this.state.opacity, { toValue: 1 }).start();
+    StatusBar.setHidden(true);
+  };
+
+  closeCard = () => {
+    Animated.spring(this.state.cardWidth, { toValue: 315 }).start();
+    Animated.spring(this.state.cardHeight, { toValue: 460 }).start();
+    Animated.spring(this.state.titleTop, { toValue: 20 }).start();
+    Animated.timing(this.state.opacity, { toValue: 1 }).start();
+    StatusBar.setHidden(false);
+  };
+
   render() {
     return (
-      <AnimatedContainer
-        style={{ width: this.state.cardWidth, height: this.state.cardHeight }}
-      >
-        <Cover>
-          <Image source={this.props.image} />
-          <Title>{this.props.title}</Title>
-          <Author>by {this.props.author}</Author>
-        </Cover>
-        <Text>{this.props.text}</Text>
-      </AnimatedContainer>
+      <TouchableWithoutFeedback onPress={this.openCard}>
+        <AnimatedContainer
+          style={{ width: this.state.cardWidth, height: this.state.cardHeight }}
+        >
+          <Cover>
+            <Image source={this.props.image} />
+            <AnimatedTitle style={{ top: this.state.titleTop }}>
+              {this.props.title}
+            </AnimatedTitle>
+            <Author>by {this.props.author}</Author>
+          </Cover>
+          <Text>{this.props.text}</Text>
+          <TouchableOpacity
+            onPress={this.closeCard}
+            style={{
+              position: "absolute",
+              top: 20,
+              right: 20
+            }}
+          >
+            <AnimatedCloseView style={{ opacity: this.state.opacity }}>
+              <Ionicons name="ios-close" size={32} color="#546bfb" />
+            </AnimatedCloseView>
+          </TouchableOpacity>
+        </AnimatedContainer>
+      </TouchableWithoutFeedback>
     );
   }
 }
 
-export default Project;
+export default connect (mapStateToProps, mapDispatchToProps)(Project);
 
 const Container = styled.View`
   width: 315px;
   height: 460px;
-  border-radius: 14px;
+  border-radius: 20px;
   background-color: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 `;
@@ -62,6 +127,8 @@ const Title = styled.Text`
   width: 300px;
 `;
 
+const AnimatedTitle = Animated.createAnimatedComponent(Title);
+
 const Author = styled.Text`
   position: absolute;
   bottom: 20px;
@@ -78,3 +145,14 @@ const Text = styled.Text`
   line-height: 24px;
   color: #3c4560;
 `;
+
+const CloseView = styled.View`
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AnimatedCloseView = Animated.createAnimatedComponent(CloseView);
