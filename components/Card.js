@@ -50,6 +50,7 @@ const Title = styled.Text`
   color: white;
   font-weight: bold;
   margin-left: 20px;
+
   margin-top: 20px;
   width: 170px;
 `;

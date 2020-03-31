@@ -19,6 +19,7 @@ export default Course;
 
 const Container = styled.View`
   background: white;
+
   height: 335px;
   width: 375px;
   border-radius: 14px;
@@ -39,8 +40,8 @@ const Logo = styled.Image`
   width: 48px;
   align-content: center;
   position: absolute;
-  top: 30px;
-  left: 155px;
+  top: 30;
+  left: 155;
 `;
 
 const Section = styled.Text`
@@ -48,8 +49,8 @@ const Section = styled.Text`
   text-transform: uppercase;
   font-size: 15px;
   position: absolute;
-  top: 153px;
-  left: 22px;
+  top: 153;
+  left: 22;
 `;
 
 const Title = styled.Text`
@@ -57,8 +58,8 @@ const Title = styled.Text`
   font-size: 25px;
   width: 190px;
   position: absolute;
-  top: 181px;
-  left: 20px;
+  top: 181;
+  left: 20;
   font-weight: bold;
 `;
 
@@ -82,15 +83,15 @@ const Subtitle = styled.Text`
   color: #3c4560;
   width: 100%;
   position: absolute;
-  left: 80px;
-  top: 20px;
+  left: 80;
+  top: 20;
   font-size: 15px;
 `;
 
 const Instructor = styled.Text`
   color: #b8bece;
   position: absolute;
-  left: 80px;
-  top: 45px;
+  left: 80;
+  top: 45;
   font-size: 13px;
 `;

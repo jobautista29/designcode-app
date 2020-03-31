@@ -28,7 +28,7 @@ class Menu extends React.Component {
     this.toggleMenu();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.toggleMenu();
   }
 
@@ -66,6 +66,7 @@ class Menu extends React.Component {
             <Ionicons name="ios-close" size={44} color="#4775F2"></Ionicons>
           </CloseView>
         </TouchableOpacity>
+
         <Content>
           {items.map((item, index) => (
             <MenuItems
@@ -100,6 +101,7 @@ const Container = styled.View`
   background: white;
   width: 100%;
   height: 100%;
+
   z-index: 100;
   border-radius: 10px;
   overflow: hidden;
@@ -133,6 +135,7 @@ const Content = styled.View`
 const items = [
   {
     icon: "ios-settings",
+
     title: "Account",
     subtitle: "settings"
   },

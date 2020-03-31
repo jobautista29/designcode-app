@@ -31,4 +31,3 @@ const Text = styled.Text`
   font-size: 17px;
   margin-left: 8px;
 `;
-
